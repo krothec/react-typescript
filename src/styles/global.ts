@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components'
 
 export default createGlobalStyle`
   *{
@@ -11,7 +11,6 @@ export default createGlobalStyle`
     background: ${props => props.theme.colors.background};
     color: ${props => props.theme.colors.primaryText};
     font: 400 1rem Lato, sans-serif;
-    padding: 1rem;
   }
 
   .main{

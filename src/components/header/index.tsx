@@ -1,18 +1,14 @@
-import { Badge } from '@mui/material'
-
 import { Head } from './styles'
-
+import Avatar from '../../components/avatar'
+import Menu from '../menu'
 export const Header = () => {
-
-  return(
-    <Head>
-      <div className='text'>
-        <div className='first'>Redes </div>
-        <div className='menu prod'>Produtos
-          <Badge badgeContent={2} color="error" />
-        </div>
-        <div className='menu conf'>Configurações</div>
+  return (
+    <Head className="text">
+      <div className="menu-text">
+        <Menu />
+        <h1>Sistema de Cadastro</h1>
       </div>
+      <Avatar />
     </Head>
   )
 }

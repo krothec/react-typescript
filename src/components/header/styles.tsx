@@ -1,31 +1,20 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const Head = styled.header`
-  height: 6rem;
+  height: 4rem;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background: ${props => props.theme.colors.backgroundColor};
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  padding: 1rem;
 
-  .text{
+  .menu-text{
     display: flex;
-    font-weight: 600;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   }
-
-  .first{
-    margin: 3rem 3rem  3rem 0rem
   }
-
-  .menu{
-    margin: 3rem;
-  }
-  .conf{
-    color: #F39200
-  }
-  .prod{
-    color: #495057;
-    >span{
-      margin-left: 0.8rem;
-    }
-  }
-
 `
