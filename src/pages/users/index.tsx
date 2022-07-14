@@ -6,19 +6,19 @@ import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import { CaretUp, CaretDown } from 'phosphor-react'
-
 import User from './user'
 import { UsersContext } from '../../context/usersContext'
+import { ScheduleContext } from '../../context/scheduleContext'
 import Modal from '../../components/modal'
 import { Inline } from './styles/index'
 
 const Users: React.FC = () => {
-  const context = useContext(UsersContext)
+  const usersContext = useContext(UsersContext)
 
-  useEffect(() => {}, [context.load])
+  useEffect(() => {}, [usersContext.load])
 
   const handleOrder = (order: string) => {
-    context.handleOrder(order)
+    usersContext.handleOrder(order)
   }
 
   return (
@@ -28,7 +28,6 @@ const Users: React.FC = () => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell align="left">Convênio</TableCell>
               <TableCell align="left" style={{ display: 'flex' }}>
                 Nome
                 <Inline>
@@ -44,12 +43,12 @@ const Users: React.FC = () => {
                   />
                 </Inline>
               </TableCell>
-              <TableCell align="left">Status</TableCell>
+              <TableCell align="left">Especialidade</TableCell>
               <TableCell align="left"></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {context.listUsers.map((user, idx) => {
+            {usersContext.listUsers.map((user, idx) => {
               if (!user.deleted) {
                 return <User user={user} key={idx} />
               }

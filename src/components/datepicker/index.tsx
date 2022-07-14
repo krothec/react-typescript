@@ -1,6 +1,8 @@
 import * as React from 'react'
+
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
+import { DatePickerCustom } from './style'
 
 const Datepicker = () => {
   const [startDate, setDate] = React.useState(new Date())
@@ -12,13 +14,18 @@ const Datepicker = () => {
     setDate(d)
   }
   return (
-    <DatePicker
-      dateFormat="dd/MM/yyyy"
-      selected={startDate}
-      onChange={selectDateHandler}
-      minDate={today}
-      todayButton={'Today'}
-    />
+    <>
+      <h6>Data de nascimento</h6>
+      <DatePickerCustom>
+        <DatePicker
+          dateFormat="dd/MM/yyyy"
+          selected={startDate}
+          onChange={selectDateHandler}
+          minDate={today}
+          todayButton={'Today'}
+        />
+      </DatePickerCustom>
+    </>
   )
 }
 

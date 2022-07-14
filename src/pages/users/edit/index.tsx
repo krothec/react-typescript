@@ -1,107 +1,121 @@
 import { useContext, useState } from 'react'
 
-import { Grid } from '@mui/material'
+import FormControl from '@mui/material/FormControl'
 import Input from '../../../components/input'
 import { UsersContext } from '../../../context/usersContext'
+import Datepicker from '../../../components/datepicker'
+import Select from '@mui/material/Select'
+import { Box, ButtonBar } from '../styles'
+import Button from '@mui/material/Button'
+import MenuItem from '@mui/material/MenuItem'
+import InputLabel from '@mui/material/InputLabel'
+import TextField from '@mui/material/TextField'
 
 export const Edit = () => {
   const context = useContext(UsersContext)
-  const [value, setValue] = useState('')
 
-  const handleSetValue = value => {
-    setValue(value)
-  }
+  const options: { id: number; value: string; label: string }[] = [
+    { id: 1, value: 'masc', label: 'Masculino' },
+    { id: 2, value: 'fem', label: 'Feminino' },
+    { id: 3, value: 'o', label: 'Outros' }
+  ]
 
   return (
     <>
-      <Grid container spacing={1} style={{ marginBottom: '32px' }}>
-        <Grid item xs={6}>
-          <Input
-            placeholder=""
-            title="Nome do usuário"
-            width="32rem"
-            height="3rem"
-            border="0.5px solid #DDDDDD"
-            radius="0.4rem"
-            padding="20px 24px"
-            value={context.user.name}
-            onChange={e => handleSetValue(e.target.value)}
+      <h2>Editar usuário</h2>
+      <Box>
+        <div hidden={true}>
+          <TextField
+            id="standard-basic"
+            label="id"
+            name="id"
+            variant="standard"
+            value={context.idCreated}
           />
-        </Grid>
-        <Grid item xs={6}>
-          <Input
-            placeholder=""
-            title="CPF"
-            width="32rem"
-            height="3rem"
-            border="0.5px solid #DDDDDD"
-            radius="0.4rem"
-            padding="20px 24px"
-            value={context.user.cpf}
-            onChange={e => handleSetValue(e.target.value)}
-          />
-        </Grid>
-      </Grid>
+        </div>
+        <Input
+          placeholder=""
+          title="Nome completo"
+          width="32rem"
+          height="3rem"
+          border="0.5px solid #DDDDDD"
+          radius="0.4rem"
+          padding="20px 24px"
+          value={context.user.name}
+          onChange={context.setValue}
+          name="name"
+        />
+        <Datepicker />
+        <Input
+          placeholder=""
+          title="Endereço"
+          width="32rem"
+          height="3rem"
+          border="0.5px solid #DDDDDD"
+          radius="0.4rem"
+          padding="20px 24px"
+          value={context.user.endereco}
+          onChange={context.setValue}
+          name="endereco"
+        />
+        <InputLabel id="demo-select-small">Gênero</InputLabel>
+        <FormControl sx={{ width: 512 }} size="small">
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={context.user.genero}
+            label="genero"
+            onChange={context.setValue}
+            name="genero"
+          >
+            {options.map((op, idx) => {
+              return (
+                <MenuItem value={op.value} key={idx}>
+                  {op.label}
+                </MenuItem>
+              )
+            })}
+          </Select>
+        </FormControl>
+        <Input
+          placeholder=""
+          title="Telefone"
+          width="32rem"
+          height="3rem"
+          border="0.5px solid #DDDDDD"
+          radius="0.4rem"
+          padding="20px 24px"
+          value={context.user.celular}
+          onChange={context.setValue}
+          name="celular"
+        />
 
-      <Grid container spacing={1} style={{ marginBottom: '32px' }}>
-        <Grid item xs={6}>
-          <Input
-            placeholder=""
-            title="E-mail"
-            width="32rem"
-            height="3rem"
-            border="0.5px solid #DDDDDD"
-            radius="0.4rem"
-            padding="20px 24px"
-            value={context.user.email}
-            onChange={e => handleSetValue(e.target.value)}
-          />
-        </Grid>
-        <Grid item xs={6}>
-          <Input
-            placeholder=""
-            title="Perfil de acesso"
-            width="32rem"
-            height="3rem"
-            border="0.5px solid #DDDDDD"
-            radius="0.4rem"
-            padding="20px 24px"
-            value={context.user.perfil}
-            onChange={e => handleSetValue(e.target.value)}
-          />
-        </Grid>
-      </Grid>
+        <Input
+          placeholder=""
+          title="E-mail"
+          width="32rem"
+          height="3rem"
+          border="0.5px solid #DDDDDD"
+          radius="0.4rem"
+          padding="20px 24px"
+          value={context.user.email}
+          onChange={context.setValue}
+          name="email"
+        />
 
-      <Grid container spacing={1} style={{ marginBottom: '32px' }}>
-        <Grid item xs={6}>
-          <Input
-            placeholder=""
-            title="Rede"
-            width="32rem"
-            height="3rem"
-            border="0.5px solid #DDDDDD"
-            subtitle="Você pode indicar mais de uma rede"
-            radius="0.4rem"
-            padding="20px 24px"
-            value={context.user.rede}
-            onChange={e => handleSetValue(e.target.value)}
-          />
-        </Grid>
-        <Grid item xs={6}>
-          <Input
-            placeholder=""
-            title="Loja"
-            width="32rem"
-            height="3rem"
-            border="0.5px solid #DDDDDD"
-            subtitle="Você pode indicar mais de uma loja"
-            radius="0.4rem"
-            padding="20px 24px"
-            value={''}
-            onChange={e => handleSetValue(e.target.value)}
-          />
-        </Grid>
-      </Grid>
+        <ButtonBar>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => context.onEdit(context.user)}
+          >
+            Salvar edição
+          </Button>
+          <Button variant="contained" color="inherit">
+            cancelar edição
+          </Button>
+        </ButtonBar>
+      </Box>
     </>
   )
 }

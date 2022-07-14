@@ -5,6 +5,7 @@ export default createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    overflow: hidden;
   }
 
   body{
@@ -16,6 +17,9 @@ export default createGlobalStyle`
   .main{
     display: flex;
     flex-direction: row;
+    margin: auto;
+    padding: 2.4rem;
+    justify-content: center;
   }
 
 `

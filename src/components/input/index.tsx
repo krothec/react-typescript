@@ -1,6 +1,8 @@
 import { HTMLAttributes, InputHTMLAttributes } from 'react'
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+  name: string
+  value: string
   placeholder?: string
   width?: string
   title?: string
@@ -10,12 +12,12 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   border?: string
   radius?: string
   padding?: string
-  value?: string
   onChange?: (event) => void
 }
 
 const Input: React.FC<InputProps> = ({
   placeholder,
+  name,
   width,
   title,
   subtitle,
@@ -39,6 +41,7 @@ const Input: React.FC<InputProps> = ({
       </p>
       <input
         value={value}
+        name={name}
         onChange={onChange}
         style={{
           width,
@@ -52,5 +55,4 @@ const Input: React.FC<InputProps> = ({
     </div>
   )
 }
-
 export default Input

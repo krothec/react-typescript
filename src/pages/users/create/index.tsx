@@ -1,17 +1,18 @@
 import { useContext, useState } from 'react'
 
+import FormControl from '@mui/material/FormControl'
 import Input from '../../../components/input'
 import { UsersContext } from '../../../context/usersContext'
 import Datepicker from '../../../components/datepicker'
-import SelectComponent from '../../../components/select'
+import Select from '@mui/material/Select'
+import { Box, ButtonBar } from './style'
+import Button from '@mui/material/Button'
+import MenuItem from '@mui/material/MenuItem'
+import InputLabel from '@mui/material/InputLabel'
+import TextField from '@mui/material/TextField'
 
 export const Create = () => {
   const context = useContext(UsersContext)
-  const [value, setValue] = useState('')
-
-  const handleSetValue = value => {
-    setValue(value)
-  }
 
   const options: { id: number; value: string; label: string }[] = [
     { id: 1, value: 'masc', label: 'Masculino' },
@@ -21,55 +22,100 @@ export const Create = () => {
 
   return (
     <>
-      <Input
-        placeholder=""
-        title="Nome completo"
-        width="32rem"
-        height="3rem"
-        border="0.5px solid #DDDDDD"
-        radius="0.4rem"
-        padding="20px 24px"
-        value={context.user.name}
-        onChange={e => handleSetValue(e.target.value)}
-      />
-      <Datepicker />
-      <Input
-        placeholder=""
-        title="Endereço"
-        width="32rem"
-        height="3rem"
-        border="0.5px solid #DDDDDD"
-        radius="0.4rem"
-        padding="20px 24px"
-        value={context.user.endereco}
-        onChange={e => handleSetValue(e.target.value)}
-      />
+      <h2>Cadastrar novo usuário</h2>
+      <Box>
+        <div hidden={true}>
+          <TextField
+            id="standard-basic"
+            label="id"
+            name="id"
+            variant="standard"
+            value={context.idCreated}
+          />
+        </div>
+        <Input
+          placeholder=""
+          title="Nome completo"
+          width="32rem"
+          height="3rem"
+          border="0.5px solid #DDDDDD"
+          radius="0.4rem"
+          padding="20px 24px"
+          value={context.user.name}
+          onChange={context.setValue}
+          name="name"
+        />
+        <Datepicker />
+        <Input
+          placeholder=""
+          title="Endereço"
+          width="32rem"
+          height="3rem"
+          border="0.5px solid #DDDDDD"
+          radius="0.4rem"
+          padding="20px 24px"
+          value={context.user.endereco}
+          onChange={context.setValue}
+          name="endereco"
+        />
+        <InputLabel id="demo-select-small">Gênero</InputLabel>
+        <FormControl sx={{ width: 512 }} size="small">
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={context.user.genero}
+            label="genero"
+            onChange={context.setValue}
+            name="genero"
+          >
+            {options.map((op, idx) => {
+              return (
+                <MenuItem value={op.value} key={idx}>
+                  {op.label}
+                </MenuItem>
+              )
+            })}
+          </Select>
+        </FormControl>
+        <Input
+          placeholder=""
+          title="Telefone"
+          width="32rem"
+          height="3rem"
+          border="0.5px solid #DDDDDD"
+          radius="0.4rem"
+          padding="20px 24px"
+          value={context.user.celular}
+          onChange={context.setValue}
+          name="celular"
+        />
 
-      <SelectComponent options={options} label="Gênero" />
+        <Input
+          placeholder=""
+          title="E-mail"
+          width="32rem"
+          height="3rem"
+          border="0.5px solid #DDDDDD"
+          radius="0.4rem"
+          padding="20px 24px"
+          value={context.user.email}
+          onChange={context.setValue}
+          name="email"
+        />
 
-      <Input
-        placeholder=""
-        title="Telefone"
-        width="32rem"
-        height="3rem"
-        border="0.5px solid #DDDDDD"
-        radius="0.4rem"
-        padding="20px 24px"
-        value={context.user.cpf}
-        onChange={e => handleSetValue(e.target.value)}
-      />
-
-      <Input
-        placeholder=""
-        title="E-mail"
-        width="32rem"
-        height="3rem"
-        border="0.5px solid #DDDDDD"
-        radius="0.4rem"
-        padding="20px 24px"
-        value={context.user.email}
-        onChange={e => handleSetValue(e.target.value)}
-      />
+        <ButtonBar>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => context.onAdd(context.user)}
+          >
+            Cadastrar
+          </Button>
+          <Button variant="contained" color="inherit">
+            Limpar
+          </Button>
+        </ButtonBar>
+      </Box>
     </>
   )
 }
